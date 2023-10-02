@@ -1,0 +1,95 @@
+syntax = "proto3";
+import "itemDetails.proto";
+import "stock.proto";
+import "google/api/annotations.proto";
+option java_multiple_files = true;
+option java_package = "org.inventory.item";
+option java_outer_classname = "ItemProto";
+package inventory;
+
+service ItemGrpc{
+  rpc createItem(CreateItemRequest) returns (CreateItemReply){
+    option (google.api.http) = {
+      post:"/createItem"
+      body:"*"
+    };
+  }
+  rpc getItem(GetItemRequest) returns (GetItemReply){
+    option(google.api.http)={
+      get:"/getItem/{id}"
+    };
+  }
+  rpc updateItem(UpdateItemRequest) returns (UpdateItemReply){
+    option(google.api.http)={
+      put:"/updateItem/{id}"
+      body:"*"
+    };
+  }
+  rpc deleteItem(DeleteItemRequest) returns (DeleteItemReply){
+    option (google.api.http)={
+      delete:"/deleteItem/{id}"
+    };
+  }
+
+}
+
+
+//Create item
+message CreateItemRequest{
+
+  int64 code = 1;
+  string category = 2;
+  int64 company_id = 3;
+  int64 stock_id = 4;
+  CreateItemDetailsRequest itemDetails=5;
+  CreateStockRequest stock=6;
+
+}
+message CreateItemReply{
+
+  int64 id = 1;
+
+}
+
+
+//Get item
+message GetItemRequest{
+  int64 id = 1;
+}
+message GetItemReply{
+  int64 code = 1;
+  string category = 2;
+  int64 company_id = 3;
+  int64 stock_id = 4;
+
+}
+
+
+//Update item
+message UpdateItemRequest{
+
+  int64 code = 1;
+  string category = 2;
+  int64 company_id = 3;
+  int64 stock_id = 4;
+  int64 unique_id=5;
+
+}
+message UpdateItemReply{
+
+  int64 id=1;
+
+}
+
+
+//Delete item
+message DeleteItemRequest{
+
+  int64 id = 1;
+
+}
+message DeleteItemReply{
+
+  string message=1;
+
+}

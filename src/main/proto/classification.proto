@@ -1,0 +1,108 @@
+syntax = "proto3";
+import "itemType.proto";
+import "item.proto";
+import "itemDetails.proto";
+import "stock.proto";
+import "google/api/annotations.proto";
+option java_multiple_files = true;
+option java_package = "org.inventory.classification";
+option java_outer_classname = "ClassificationProto";
+
+package inventory;
+
+service ClassificationGrpc {
+  rpc createDetails (CreateClassificationRequest) returns (CreateClassificationReply) {
+    option (google.api.http) = {
+      post:"/createDetails"
+      body:"*"
+    };
+  };
+  rpc getDetails(GetClassificationRequest) returns(GetClassificationReply){
+    option(google.api.http) = {
+      get:"/getDetails/{id}"
+    };
+  };
+  rpc getAllDetails(GetClassificationRequestNew) returns (GetClassificationReplyNew){
+    option (google.api.http) = {
+      get:"/getAllDetails/{id}"
+    };
+  };
+  rpc updateDetails(UpdateClassificationRequest)returns(UpdateClassificationReply){
+    option (google.api.http) = {
+      put:"/updateDetails/{id}"
+      body:"*"
+    };
+  }
+  rpc deleteDetails(DeleteClassificationRequest)returns (DeleteClassificationReply){
+    option (google.api.http) = {
+      delete:"/deleteDetails/{id}"
+    };
+  }
+}
+
+
+//Create Details
+message CreateClassificationRequest {
+  string name = 1;
+  string description = 2;
+  string tag = 3;
+  CreateItemTypeRequest itemType = 4;
+}
+
+
+message CreateClassificationReply {
+  int64 id = 1;
+
+}
+
+//Get Details
+message GetClassificationRequest {
+  int64 id = 1;
+}
+
+message GetClassificationReply {
+  string name = 1;
+  string description = 2;
+  string tag = 3;
+
+
+}
+
+//Get All Details
+message GetClassificationRequestNew{
+  int64 id = 1;
+}
+
+message GetClassificationReplyNew{
+  string name = 1;
+  string description = 2;
+  string tag = 3;
+  GetItemTypeReply itemType = 4;
+  GetItemReply itemReply = 5;
+  GetItemDetailsReply itemDetails = 6;
+  GetStockReply stock = 7;
+
+}
+
+//Update Details
+message UpdateClassificationRequest {
+  string name = 1;
+  string description = 2;
+  string tag = 3;
+  int64 id = 4;
+}
+
+message UpdateClassificationReply {
+  int64 id = 1;
+
+}
+
+//Delete Details
+message DeleteClassificationRequest {
+  int64 id = 1;
+}
+
+message DeleteClassificationReply {
+  string message = 1;
+
+}

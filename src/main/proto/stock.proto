@@ -1,0 +1,69 @@
+syntax = "proto3";
+import "google/api/annotations.proto";
+option java_multiple_files = true;
+option java_package = "org.inventory.stock";
+option java_outer_classname = "StockProto";
+//import "google/protobuf/api.proto";
+//import "google/api/annotations.proto";
+//import "google/api/http.proto";
+//import "google/protobuf/descriptor.proto";
+package inventory;
+
+service StockGrpc{
+  rpc createStock(CreateStockRequest) returns (CreateStockReply){
+    option (google.api.http) = {
+      post: "/createStock"
+      body:"*"
+    };
+  }
+  rpc getStock(GetStockRequest) returns (GetStockReply){
+    option (google.api.http) = {
+      get: "/getStock/{id}"
+    };
+  }
+  rpc updateStock(UpdateStockRequest) returns (UpdateStockReply){
+    option (google.api.http) = {
+      put: "/updateStock/{id}"
+      body:"*"
+    };
+  }
+  //rpc deleteStock(DeleteStockRequest) returns (DeleteStockReply){}
+}
+
+//Create Stock Request
+message CreateStockRequest{
+  int64 available_qty = 1;
+  int64 location_code = 2;
+
+}
+message CreateStockReply{
+  int64 id=1;
+}
+
+//Get Stock Request
+message GetStockRequest{
+  int64 id=1;
+}
+message GetStockReply{
+  int64 available_qty = 1;
+  int64 location_code = 2;
+}
+
+//Update Stock Request
+message UpdateStockRequest{
+  int64 available_qty = 1;
+  int64 location_code = 2;
+  int64 id=3;
+
+}
+message UpdateStockReply{
+  int64 id=1;
+}
+
+//Delete Stock Request
+message DeleteStockRequest{
+  int64 id=1;
+}
+message DeleteStockReply{
+  string message=1;
+}

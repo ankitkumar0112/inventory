@@ -1,0 +1,74 @@
+syntax = "proto3";
+import "google/api/annotations.proto";
+option java_multiple_files = true;
+option java_package = "org.inventory.details";
+option java_outer_classname = "ItemDetailsProto";
+
+package inventory;
+
+service ItemDetailsGrpc{
+  rpc createItemDetails(CreateItemDetailsRequest) returns (CreateItemDetailsReply){
+    option(google.api.http)={
+      post:"/createItemDetails"
+      body:"*"
+    };
+  }
+  rpc GetItemDetails(GetItemDetailsRequest) returns (GetItemDetailsReply){
+    option(google.api.http)={
+      get:"/getItemDetails/{id}"
+    };
+  }
+  rpc UpdateItemDetails(UpdateItemDetailsRequest) returns (UpdateItemDetailsReply){
+    option(google.api.http)={
+      put:"/updateItemDetails/{id}"
+      body:"*"
+    };
+  }
+ // rpc DeleteItemDetails(DeleteItemDetailsRequest) returns (DeleteItemDetailsReply){}
+}
+
+//Create Item Details
+message CreateItemDetailsRequest{
+  string name = 1;
+  string description = 2;
+  string media = 3;
+  int64 supplier_id = 4;
+}
+
+message CreateItemDetailsReply{
+  int64 id=1;
+}
+
+//Get Item Details
+message GetItemDetailsRequest{
+  int64 id=1;
+}
+
+message GetItemDetailsReply{
+  string name = 1;
+  string description = 2;
+  string media = 3;
+  int64 supplier_id = 4;
+}
+
+//Update Item Details
+message UpdateItemDetailsRequest{
+  string name = 1;
+  string description = 2;
+  string media = 3;
+  int64 supplier_id = 4;
+  int64 id=5;
+}
+
+message UpdateItemDetailsReply{
+ int64 id=1;
+}
+
+//Delete Item Details
+message DeleteItemDetailsRequest{
+  int64 id=1;
+}
+
+message DeleteItemDetailsReply{
+ string message=1;
+}

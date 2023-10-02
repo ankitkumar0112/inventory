@@ -1,0 +1,96 @@
+syntax = "proto3";
+import "item.proto";
+import "google/api/annotations.proto";
+option java_multiple_files = true;
+option java_package = "org.inventory.type";
+option java_outer_classname = "ItemTypeProto";
+package inventory;
+
+service ItemTypeGrpc{
+  rpc createItemType(CreateItemTypeRequest) returns (CreateItemTypeReply){
+    option(google.api.http)={
+      post:"/createItemType"
+      body:"*"
+    };
+  }
+  rpc getItemType(GetItemTypeRequest) returns (GetItemTypeReply){
+    option(google.api.http)={
+      get:"/getItemType/{id}"
+    };
+  }
+  rpc getItemTypeNew(GetItemTypeRequest) returns (GetItemTypeReply1){
+    option(google.api.http)={
+      get:"/getItemTypeNew/{id}"
+    };
+  }
+  rpc updateItemType(UpdateItemTypeRequest) returns (UpdateItemTypeReply){
+    option(google.api.http)={
+      put:"/updateItemType/{id}"
+      body:"*"
+    };
+  }
+  rpc deleteItemType(DeleteItemTypeRequest) returns (DeleteItemTypeReply){
+    option(google.api.http)={
+      delete:"/deleteItemType/{id}"
+    };
+  }
+}
+
+//Create Item Type
+message CreateItemTypeRequest{
+  string name = 1;
+  string description = 2;
+  string classification_tag = 3;
+  CreateItemRequest item = 5;
+
+
+}
+message CreateItemTypeReply{
+  int64 id=1;
+
+}
+
+//Get Item Type
+message GetItemTypeRequest{
+  int64 id=1;
+
+}
+message GetItemTypeReply{
+  string name = 1;
+  string description = 2;
+  string classification_tag = 3;
+}
+
+message GetItemTypeReply1{
+  string name = 1;
+  string description = 2;
+  string classification_tag = 3;
+  string name1 = 4;
+  string description1 = 5;
+  string classification_tag1 = 6;
+}
+
+//Update Item Type
+message UpdateItemTypeRequest{
+  string name = 1;
+  string description = 2;
+  string classification_tag = 3;
+  int64 id=4;
+
+}
+message UpdateItemTypeReply{
+  int64 id=1;
+
+
+}
+
+//Delete Item Type
+message DeleteItemTypeRequest{
+  int64 id=1;
+
+}
+message DeleteItemTypeReply{
+  string message = 1;
+
+
+}
