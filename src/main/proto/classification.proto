@@ -81,7 +81,6 @@ message GetClassificationReplyNew{
   GetItemReply itemReply = 5;
   GetItemDetailsReply itemDetails = 6;
   GetStockReply stock = 7;
-
 }
 
 //Update Details
