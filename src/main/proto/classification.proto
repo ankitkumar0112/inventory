@@ -78,9 +78,12 @@ message GetClassificationReplyNew{
   string description = 2;
   string tag = 3;
   GetItemTypeReply itemType = 4;
+
   GetItemReply itemReply = 5;
+
   GetItemDetailsReply itemDetails = 6;
   GetStockReply stock = 7;
+
 
 }
 
